@@ -1,0 +1,25 @@
+<section *ngIf="obsState | async as state">
+  <h1>Promotions</h1>
+  <ul>
+    <li *ngFor  = "let promo of state.promotions"
+        (click) = "selectPromotion(promo)"
+        [class.currentPromo] = "promo === state.currentPromo"
+        >
+      {{promo}}
+    </li>
+  </ul>
+
+  <hr/>
+  <section *ngIf="state.currentPromo">
+    <h1>Les étudiants de {{state.currentPromo}}</h1>
+    <ul>
+      <li *ngFor="let student of state.students; index as i; trackBy: trackById">
+        <button (click)="currentStudent = student">EDIT</button>
+        <app-student [data]    = "student"
+                     [editing] = "currentStudent && currentStudent.id == student.id"
+                     (update)  = "update(state.currentPromo, student, $event)"
+                     ></app-student>
+      </li>
+    </ul>
+  </section>
+</section>

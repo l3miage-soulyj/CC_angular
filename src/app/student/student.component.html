@@ -1,0 +1,18 @@
+<section *ngIf="!editing">
+  <label>{{data.name}}</label>
+  :
+  <label>{{data.score}}</label>
+</section>
+
+<section *ngIf="editing">
+  <label>ID: {{data.id}}</label>
+  <form>
+    <label>
+      Nom: <input name="name" [ngModel]="data.name" (ngModelChange)="update.emit( {name: $event} )" />
+    </label>
+    <br/>
+    <label>
+      Score: <input name="score" type="number" [ngModel]="data.score" (ngModelChange)="update.emit( {score: $event} )" />
+    </label>
+  </form>
+</section>
